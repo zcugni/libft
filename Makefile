@@ -23,7 +23,8 @@ SRCS =  ft_isalnum.c ft_isprint.c ft_strcat.c ft_strdup.c ft_strncmp.c \
 		ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstcpy.c ft_pow.c ft_lstfind.c \
-		ft_lstappend.c ft_strndup.c ft_lstlength.c ft_itoa_base.c lst_to_str.c
+		ft_lstappend.c ft_strndup.c ft_lstlength.c ft_itoa_base.c lst_to_str.c \
+		ft_strsub_free.c ft_strjoin_free.c is_neg.c lst_clr.c
 
 OBJS = $(SRCS:.c=.o)
 

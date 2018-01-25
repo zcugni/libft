@@ -35,6 +35,7 @@ char		*ft_itoa_base(unsigned int nb, int base, int upper)
 	char	*res;
 	int		rest;
 	t_list	*tmp_result;
+	char	*tmp_str;
 
 	tmp_result = NULL;
 	if (nb == 0)
@@ -43,8 +44,11 @@ char		*ft_itoa_base(unsigned int nb, int base, int upper)
 	{
 		rest = nb % base;
 		nb /= base;
-		ft_lstadd(&tmp_result, ft_lstnew(set_value(upper, rest), 1));
+		tmp_str = set_value(upper, rest);
+		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 1));
+		free(tmp_str);
 	}
 	res = lst_to_str(tmp_result);
+	lst_clr(&tmp_result);
 	return (res);
 }

@@ -39,8 +39,11 @@ static void	divide(int n, t_list **result)
 char		*ft_itoa(int n)
 {
 	t_list	*result;
+	char	*res_str;
 
 	result = NULL;
 	divide(n, &result);
-	return (lst_to_str(result)); //leak sur result ?
+	res_str = lst_to_str(result);
+	free(result);
+	return (res_str);
 }
