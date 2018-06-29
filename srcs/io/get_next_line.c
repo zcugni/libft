@@ -6,7 +6,7 @@
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 12:13:48 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/27 12:13:50 by zcugni           ###   ########.fr       */
+/*   Updated: 2018/06/29 18:37:08 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,17 @@ int			get_next_line(const int fd, char **line, char separator)
 			{
 				free(buff);
 				if (!rest[0])
+				{
+					//free(rest); //theoriquement ma leaks vient d'ici, mais je sais pas si je peux tout le temps free comme ca
 					return (0);
+				}
 				return (update_line(line, &rest));
 			}
 			else if (state < 0)
+			{
+				free(buff);
 				return (state);
+			}
 			rest = ft_strjoin_overlap(&rest, &buff);
 		}
 		else
