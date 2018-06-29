@@ -12,15 +12,19 @@
 
 #include "libft.h"
 
+#include <stdio.h>
+
 char	*ft_strndup(const char *s1, size_t n)
 {
 	char	*str;
 	size_t	i;
 
 	i = 0;
-	str = malloc((n + 1) * sizeof(char));
-	if (str != NULL)
+	if (n != 0)
 	{
+		str = malloc((n + 1) * sizeof(char));
+		if (!str)
+			exit_error("malloc error\n", 1);
 		while (i < n)
 		{
 			str[i] = s1[i];
@@ -28,5 +32,7 @@ char	*ft_strndup(const char *s1, size_t n)
 		}
 		str[i] = '\0';
 	}
+	else
+		str = NULL;
 	return (str);
 }

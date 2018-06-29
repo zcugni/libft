@@ -23,10 +23,11 @@ static int	if_return(char **rest, char **line, int index)
 	return (1);
 }
 
-static void	update_line(char **line, char **rest)
+static int	update_line(char **line, char **rest)
 {
 	*line = ft_strdup(*rest);
 	ft_strdel(rest);
+	return (1);
 }
 
 char		*ft_strjoin_overlap(char **s1, char **s2)
@@ -40,7 +41,7 @@ char		*ft_strjoin_overlap(char **s1, char **s2)
 	i = 0;
 	str = malloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (!str)
-		return (NULL);
+		exit_error("malloc error\n", 1);
 	while (i < ft_strlen(*s1))
 	{
 		str[i] = (*s1)[i];
@@ -58,7 +59,7 @@ char		*ft_strjoin_overlap(char **s1, char **s2)
 	return (str);
 }
 
-int			get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line, char separator)
 {
 	static char *rest = NULL;
 	char		*buff;
@@ -68,17 +69,17 @@ int			get_next_line(const int fd, char **line)
 	while (1)
 	{
 		rest = (rest == NULL ? ft_strnew(0) : rest);
-		if ((index = ft_strchri(rest, '\n')) == -1)
+		if ((index = ft_strchri(rest, separator)) == -1)
 		{
 			buff = ft_strnew(BUFF_SIZE + 1);
 			if ((state = read(fd, buff, BUFF_SIZE)) == 0)
 			{
+				free(buff);
 				if (!rest[0])
 					return (0);
-				update_line(line, &rest);
-				return (1);
+				return (update_line(line, &rest));
 			}
-			else if (state == -1)
+			else if (state < 0)
 				return (state);
 			rest = ft_strjoin_overlap(&rest, &buff);
 		}

@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../libft.h"
 
 static char	*set_value(int upper, int rest)
 {
 	char	*letter;
 
 	letter = malloc(2);
+	if (!letter)
+		exit_error("malloc_error\n", 1);
 	letter[0] = rest + 48;
 	letter[0] = (rest == 10 ? 'a' : letter[0]);
 	letter[0] = (rest == 11 ? 'b' : letter[0]);
@@ -76,7 +78,7 @@ char		*ft_itoa_base_2_long(unsigned long long nb, int base, int upper)
 	return (res);
 }
 
-char		*ft_itoa_base_uintmax(__uintmax_t nb, int base, int upper)
+char		*ft_itoa_base_uintmax(uintmax_t nb, int base, int upper)
 {
 	char	*res;
 	int		rest;

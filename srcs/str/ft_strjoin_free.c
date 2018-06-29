@@ -19,12 +19,12 @@ char	*ft_strjoin_free(char *s1, char *s2, int side_to_free)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1 && s2)
-		return (ft_strdup(s2)); // c'est vraiment necessaire d'utiliser strdup ?
+		return (ft_strdup(s2));
 	if (s1 && !s2)
-		return (s1); // strdup ?
+		return (s1);
 	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
-		return (NULL);
+		exit_error("malloc error\n", 1);
 	str[0] = '\0';
 	ft_strcat(str, s1);
 	ft_strcat(str, s2);
