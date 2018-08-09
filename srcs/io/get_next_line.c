@@ -23,40 +23,66 @@ static int	if_return(char **rest, char **line, int index)
 	return (1);
 }
 
-static int	update_line(char **line, char **rest)
+char	*ft_strncpyat(char *dst, const char *src, size_t len, int shift)
 {
-	*line = ft_strdup(*rest);
-	ft_strdel(rest);
-	return (1);
+	size_t src_len;
+	size_t i;
+
+	src_len = ft_strlen(src);
+	i = 0;
+	while (i < len)
+	{
+		if (i + shift > src_len)
+			dst[i + shift] = '\0';
+		else
+			dst[i + shift] = src[i];
+		i++;
+	}
+	return (dst);
 }
 
-char		*ft_strjoin_overlap(char **s1, char **s2)
+static char	*ft_strjoin_overlap(char **s1, char **s2)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
+	int		len_1;
+	int		len_2;
 
-	if (!*s1 || !*s2)
+	if (!*s2)
 		return (NULL);
-	i = 0;
-	str = malloc(ft_strlen(*s1) + ft_strlen(*s2) + 1);
-	if (!str)
-		exit_error("malloc error\n", 1);
-	while (i < ft_strlen(*s1))
+	if (!*s1)
+		str = ft_strdup(*s2);
+	else
 	{
-		str[i] = (*s1)[i];
-		i++;
+		i = 0;
+		len_1 = ft_strlen(*s1);
+		len_2 = ft_strlen(*s2);
+		str = malloc(len_1 + len_2 + 1);
+		if (!str)
+			exit_error("malloc error\n", 1);
+		ft_strncpyat(str, *s1, len_1, 0);
+		ft_strncpyat(str, *s2, ft_strlen(*s2), len_1);
+		ft_strdel(s1);
+		str[len_1 + len_2] = '\0';
 	}
-	ft_strdel(s1);
-	j = 0;
-	while (j < ft_strlen(*s2))
-	{
-		str[i + j] = (*s2)[j];
-		j++;
-	}
-	str[i + j] = '\0';
 	ft_strdel(s2);
 	return (str);
+}
+
+static int	stopped_reading(char **buff, int state, char **line, char **rest)
+{
+	free(*buff);
+	if (state == 0)
+	{
+		if (!*rest)
+			return (0);
+		*line = ft_strdup(*rest);
+		ft_strdel(rest);
+		return (1);
+	}
+	else
+		return (state);
 }
 
 int			get_next_line(const int fd, char **line, char separator)
@@ -68,25 +94,12 @@ int			get_next_line(const int fd, char **line, char separator)
 
 	while (1)
 	{
-		rest = (rest == NULL ? ft_strnew(0) : rest);
 		if ((index = ft_strchri(rest, separator)) == -1)
 		{
 			buff = ft_strnew(BUFF_SIZE + 1);
-			if ((state = read(fd, buff, BUFF_SIZE)) == 0)
-			{
-				free(buff);
-				if (!rest[0])
-				{
-					//free(rest); //theoriquement ma leaks vient d'ici, mais je sais pas si je peux tout le temps free comme ca
-					return (0);
-				}
-				return (update_line(line, &rest));
-			}
-			else if (state < 0)
-			{
-				free(buff);
-				return (state);
-			}
+			state = read(fd, buff, BUFF_SIZE);
+			if (state <= 0)
+				return (stopped_reading(&buff, state, line, &rest));
 			rest = ft_strjoin_overlap(&rest, &buff);
 		}
 		else
