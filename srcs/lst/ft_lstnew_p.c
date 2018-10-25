@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew_pointer(void *content, size_t content_size)
+t_list	*ft_lstnew_p(void *content, size_t content_size)
 {
 	t_list	*new;
 
 	new = (t_list *)malloc(sizeof(t_list));
 	if (new == NULL)
-		exit_error("malloc error\n", 1);
+		exit_error("malloc error\n", MALLOC_ERR);
 	if (content == NULL)
 	{
 		new->content = NULL;
