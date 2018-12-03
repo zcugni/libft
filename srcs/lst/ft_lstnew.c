@@ -12,24 +12,35 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+static void	*free_ret(t_list **new)
+{
+	ft_memdel((void **)new);
+	return (NULL);
+}
+
+t_list	*ft_lstnew(void const *content, size_t content_size, int need_malloc)
 {
 	t_list	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
-	if (new == NULL)
+	new = malloc(sizeof(t_list));
+	if (!new)
 		exit_error("malloc error\n", MALLOC_ERR);
-	if (content == NULL)
+	if (!content)
 	{
 		new->content = NULL;
 		new->content_size = 0;
 	}
 	else
 	{
-		new->content = malloc(content_size);
-		if (new->content == NULL)
-			exit_error("malloc error\n", MALLOC_ERR);
-		ft_memcpy(new->content, content, content_size);
+		if (need_malloc)
+		{
+			new->content = malloc(content_size);
+			if (!new->content)
+				return (free_ret(&new));
+			ft_memcpy(new->content, content, content_size);
+		}
+		else
+			new->content = (void *)content;
 		new->content_size = content_size;
 	}
 	new->next = NULL;

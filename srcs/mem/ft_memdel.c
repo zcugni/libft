@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+//si je veux faire ca proprement je devrais ajouter une taille
+
 void	ft_memdel(void **ap)
 {
 	if (ap)

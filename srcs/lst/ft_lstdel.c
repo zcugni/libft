@@ -12,12 +12,14 @@
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	ft_lstdel(t_list **alst, void (*del)(void *), int need_free)
 {
-	if (alst && del)
+	if (alst && *alst && del)
 	{
 		if ((*alst)->next)
-			ft_lstdel(&((*alst)->next), del);
-		ft_lstdelone(alst, del);
+			ft_lstdel(&((*alst)->next), del, need_free);
+		if (need_free)
+			del((*alst)->content);
+		ft_memdel((void**)alst);
 	}
 }

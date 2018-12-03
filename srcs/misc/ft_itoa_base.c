@@ -47,10 +47,10 @@ char		*ft_itoa_base(unsigned int nb, int base, int upper)
 		rest = nb % base;
 		nb /= base;
 		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 1));
+		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 1, 1));
 		free(tmp_str);
 	}
 	res = lst_to_str(tmp_result);
-	lst_clr(&tmp_result, free);
+	ft_lstdel(&tmp_result, free, 1);
 	return (res);
 }

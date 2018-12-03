@@ -14,12 +14,15 @@
 
 void	ft_putstr_fd(char const *str, int fd)
 {
-	if (str)
+	int i;
+
+	i = 0;
+	if (str[i])
 	{
-		while (*str)
+		while (str[i])
 		{
-			ft_putchar_fd(*str, fd);
-			str++;
+			ft_putchar_fd(str[i], fd);
+			i++;
 		}
 	}
 }
