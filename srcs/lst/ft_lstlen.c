@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfind.c                                       :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:13:45 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/14 14:13:58 by zcugni           ###   ########.fr       */
+/*   Created: 2017/12/12 15:56:10 by zcugni            #+#    #+#             */
+/*   Updated: 2017/12/12 15:56:16 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstfind(t_list *list, void *content, size_t size)
+int	ft_lstlen(t_list *lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
+	int		i;
 
-	tmp = list;
+	i = 0;
+	tmp = lst;
 	while (tmp)
 	{
-		if (tmp->content)
-			if (ft_memcmp((const void *)tmp->content,
-			(const void *)content, size) == 0)
-				return (tmp);
 		tmp = tmp->next;
+		i++;
 	}
-	return (NULL);
+	return (i);
 }

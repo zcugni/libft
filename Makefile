@@ -24,9 +24,9 @@ SRCS_STR = ft_strcat.c ft_strdup.c ft_strncmp.c ft_strstr.c ft_strcpy.c \
 			ft_strsplit_white.c
 
 SRCS_LST = ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstcpy.c ft_lstnew.c \
-			ft_lstdelone.c ft_lstdel.c ft_lstfind.c ft_lstappend.c \
-			lst_to_str.c ft_lstlength.c lst_findi.c ft_pop.c \
-			bubble_sort_lst.c remove_first_elem.c
+			ft_lstdelone.c ft_lstdel.c ft_lstappend.c \
+			lst_to_str.c ft_lstlen.c ft_lstpop.c \
+			bubble_sort_lst.c
 
 SRCS_TREE = compare_index.c find_in_tree.c insert_rbt.c new_rbt_node.c \
 			rotate.c display_tree_id.c rbt_clear.c

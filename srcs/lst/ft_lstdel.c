@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *), int need_free)
+void	ft_lstdel(t_list **alst, void (*del)(void *))
 {
 	if (alst && *alst && del)
 	{
 		if ((*alst)->next)
-			ft_lstdel(&((*alst)->next), del, need_free);
-		if (need_free)
+			ft_lstdel(&((*alst)->next), del);
+		if (del) //je sais pas si je peux faire ca
 			del((*alst)->content);
 		ft_memdel((void**)alst);
 	}

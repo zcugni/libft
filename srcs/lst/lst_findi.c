@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "libft.h"
 
 int	lst_findi(t_list *list, void *content, size_t size)
 {
@@ -18,7 +18,7 @@ int	lst_findi(t_list *list, void *content, size_t size)
 	int		i;
 
 	tmp = list;
-	i = 1;
+	i = 0;
 	while (tmp)
 	{
 		if (tmp->content)

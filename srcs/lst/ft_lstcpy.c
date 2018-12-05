@@ -22,7 +22,7 @@ t_list	*ft_lstcpy(t_list *ori, int need_malloc)
 		return (NULL);
 	new = ft_lstnew(ori->content, ori->content_size, need_malloc);
 	if (!new)
-		return (NULL);
+		exit_error("malloc error\n", MALLOC_ERR);
 	first_elem = new;
 	current = ori->next;
 	while (current)
@@ -30,7 +30,7 @@ t_list	*ft_lstcpy(t_list *ori, int need_malloc)
 		new->next = ft_lstnew(current->content, current->content_size,
 															need_malloc);
 		if (!new->next)
-			return (NULL);
+			exit_error("malloc error\n", MALLOC_ERR);
 		new = new->next;
 		current = current->next;
 	}

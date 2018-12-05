@@ -44,13 +44,13 @@ static int	add_reset(t_detail *co_det, t_list **f_lst, t_pos *p, int add_null)
 				free(co_det->conv->str[j++]);
 			free(co_det->conv->str);
 			free(co_det->conv);
-			ft_lstdel(&(co_det->info), free, 1);
+			ft_lstdel(&(co_det->info), free);
 			free(co_det->ori_str);
 			display(*f_lst, 1);
 			return (0);
 		}
 	add(co_det, f_lst, add_null);
-	ft_lstdel(&(co_det->info), free, 1);
+	ft_lstdel(&(co_det->info), free);
 	p->start = p->i + 1;
 	p->mid = p->start;
 	return (1);
@@ -74,7 +74,7 @@ static int	handle_conv(t_detail *co_det, t_pos *p, va_list ap, t_list **f_lst)
 	if ((type == 'c' || type == 'C') && co_det->conv->str[0]
 		&& ft_strlen(co_det->conv->str[0]) == 0)
 	{
-		if (ft_lstfind(co_det->info, "-", 1))
+		if (lst_findi(co_det->info, "-", 1) > -1)
 			ft_lstappend(f_lst, ft_lstnew("\0", 0, 1));
 		(co_det->width)--;
 		add_null = 1;

@@ -161,14 +161,11 @@ char						**ft_strsplit_white(char const *s);
 void						ft_lstadd(t_list **alst, t_list *new);
 void						ft_lstappend(t_list **alst, t_list *new);
 t_list						*ft_lstcpy(t_list *ori, int need_malloc);
-void						ft_lstdel(t_list **alst,
-												void (*del)(void *), int need_free);
+void						ft_lstdel(t_list **alst, void (*del)(void *));
 void						ft_lstdelone(t_list **alst, void (*del)(void *));
-t_list						*ft_lstfind(t_list *list, void *content,
-															size_t size);
 int							lst_findi(t_list *list, void *content, size_t size);
 void						ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-int							ft_lstlength(t_list *lst);
+int							ft_lstlen(t_list *lst);
 t_list						*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list						*ft_lstnew(void const *content,
 														size_t content_size, int need_malloc);
@@ -176,7 +173,6 @@ char						*lst_to_str(t_list *lst);
 t_list						*ft_pop(t_list **lst);
 void						bubble_sort_lst(t_list **lst,
 												int (*get_nb)(t_list *lst));
-void						remove_first_elem(t_list **lst);
 /*
 **Tree
 */

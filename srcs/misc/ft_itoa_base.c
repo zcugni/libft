@@ -51,6 +51,6 @@ char		*ft_itoa_base(unsigned int nb, int base, int upper)
 		free(tmp_str);
 	}
 	res = lst_to_str(tmp_result);
-	ft_lstdel(&tmp_result, free, 1);
+	ft_lstdel(&tmp_result, free);
 	return (res);
 }

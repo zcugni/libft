@@ -19,7 +19,7 @@ char	*lst_to_str(t_list *lst)
 	t_list	*tmp_lst;
 
 	tmp_lst = lst;
-	str = malloc(ft_lstlength(lst) + 1);
+	str = malloc(ft_lstlen(lst) + 1);
 	if (!str)
 		exit_error("malloc error", MALLOC_ERR);
 	i = 0;

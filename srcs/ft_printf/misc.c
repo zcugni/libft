@@ -31,7 +31,7 @@ int			display(t_list *final_lst, int error)
 		length += ft_strlen(tmp->content);
 		tmp = tmp->next;
 	}
-	ft_lstdel(&final_lst, free, 1);
+	ft_lstdel(&final_lst, free);
 	if (error)
 		return (-1);
 	else
@@ -55,7 +55,7 @@ void		add(t_detail *det, t_list **fin_lst, int add_null)
 				free(det->conv->str[j]);
 				j++;
 			}
-		if (add_null && !ft_lstfind(det->info, "-", 1))
+		if (add_null && lst_findi(det->info, "-", 1) == -1)
 			ft_lstappend(fin_lst, ft_lstnew("\0", 0, 1));
 		free(det->conv->str);
 		free(det->conv);

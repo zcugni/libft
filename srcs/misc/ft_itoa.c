@@ -33,7 +33,7 @@ static void	divide(long long n, t_list **result)
 		ft_lstadd(result, ft_lstnew("-", 1, 1));
 }
 
-char		*ft_itoa(long long n)
+char		*ft_itoa(long long n) ///refaire sans liste
 {
 	t_list	*result;
 	char	*res_str;
@@ -41,6 +41,6 @@ char		*ft_itoa(long long n)
 	result = NULL;
 	divide(n, &result);
 	res_str = lst_to_str(result);
-	ft_lstdel(&result, free, 1);
+	ft_lstdel(&result, free);
 	return (res_str);
 }
