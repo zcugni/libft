@@ -14,36 +14,34 @@ NAME = libft.a
 FLAG = -Wall -Werror -Wextra
 HEADER_PATH = .
 
-SRCS_STR = ft_strcat.c ft_strdup.c ft_strncmp.c ft_strstr.c ft_strcpy.c \
+SRCS_STR =	ft_strcat.c ft_strdup.c ft_strncmp.c ft_strstr.c ft_strcpy.c \
 			ft_strncat.c ft_strrchr.c ft_strncpy.c ft_strnew.c ft_strdel.c \
 			ft_strclr.c ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
-			ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c \
-			ft_strsplit.c ft_strsub_free.c ft_strjoin_free.c ft_strcmp.c \
-			ft_strlen.c ft_strnstr.c ft_toupper.c ft_tolower.c ft_strndup.c \
-			ft_strchri.c ft_strchr.c ft_strlcat.c \
-			ft_strsplit_white.c
+			ft_strequ.c ft_strnequ.c ft_strtrim.c ft_strsplit.c  ft_strcmp.c \
+			ft_strlen.c ft_strnstr.c ft_toupper.c ft_tolower.c ft_strchri.c \
+			ft_strchr.c ft_strlcat.c m_strndup.c m_strsplit_white.c \
+			m_strsub.c m_strjoin.c 
 
-SRCS_LST = ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstcpy.c ft_lstnew.c \
-			ft_lstdelone.c ft_lstdel.c ft_lstappend.c \
-			lst_to_str.c ft_lstlen.c ft_lstpop.c \
-			bubble_sort_lst.c
+SRCS_LST =	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstdelone.c m_lstcpy.c \
+			m_lstnew.c m_lstdel.c m_lstappend.c m_lst_to_str.c m_lstlen.c \
+			m_lstpop.c m_bubble_sort_lst.c
 
 SRCS_TREE = compare_index.c find_in_tree.c insert_rbt.c new_rbt_node.c \
 			rotate.c display_tree_id.c rbt_clear.c
 
-SRCS_MEM = ft_memmove.c ft_memchr.c ft_memcmp.c ft_memalloc.c ft_memdel.c \
-			ft_memcpy.c ft_bzero.c ft_memset.c ft_memccpy.c get_leaks.c
+SRCS_MEM =	ft_memmove.c ft_memchr.c ft_memcmp.c ft_memalloc.c ft_memccpy.c \
+			ft_memcpy.c ft_bzero.c ft_memset.c m_memdel.c m_get_leaks.c \
 
-SRCS_IO = ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
+SRCS_IO =	ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
 			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c get_next_line.c \
-			exit_error.c
+			m_exit_error.c
 
 SRCS_FTPRINTF = convert_nb.c convert_string.c convert_all.c flag.c ft_printf.c \
-			get_info.c misc.c pad_precision.c pad_width.c
+				get_info.c misc.c pad_precision.c pad_width.c
 
 SRCS_MISC = ft_isalnum.c ft_isprint.c ft_isalpha.c ft_atoi.c ft_isascii.c \
-			ft_isdigit.c ft_itoa.c ft_pow.c ft_itoa_base.c is_neg.c \
-			ft_iswhitespace.c ft_atoi_harsh.c
+			ft_isdigit.c ft_itoa.c ft_iswhitespace.c m_pow.c m_itoa_base.c \
+			 m_atoi_harsh.c
 
 SRCS = $(SRCS_STR) $(SRCS_LST) $(SRCS_IO) $(SRCS_MEM) $(SRCS_FTPRINTF) $(SRCS_MISC) $(SRCS_TREE)
 

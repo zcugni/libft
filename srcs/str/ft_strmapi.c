@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+** Like ft_strmap, apply f function to each char of a string
+** and create a new string with the result. But this time, also give the
+** index of a char as a parameter
+*/
+
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	size_t	len;
@@ -23,7 +29,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	len = ft_strlen(s);
 	str = malloc(len + 1);
 	if (!str)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	i = 0;
 	while (s[i])
 	{

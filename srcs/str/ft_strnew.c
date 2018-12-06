@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Return a cleared, malloc'ed string
+*/
+
 char	*ft_strnew(size_t size)
 {
 	return ((char *)ft_memalloc(size + 1));

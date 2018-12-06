@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   m_lstnew.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,19 +12,24 @@
 
 #include "libft.h"
 
+/*
+** Create a new list node. Either keep the pointer to the content or malloc it
+*/
+
 static void	*free_ret(t_list **new)
 {
-	ft_memdel((void **)new);
+	m_memdel((void **)new, sizeof(t_list *));
 	return (NULL);
 }
 
-t_list	*ft_lstnew(void const *content, size_t content_size, int need_malloc)
+t_list		*m_lstnew(void const *content, size_t content_size,
+															int need_malloc)
 {
 	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	if (!content)
 	{
 		new->content = NULL;

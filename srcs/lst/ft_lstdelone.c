@@ -17,6 +17,6 @@ void	ft_lstdelone(t_list **alst, void (*del)(void *))
 	if (alst && del)
 	{
 		del((*alst)->content);
-		ft_memdel((void **)alst);
+		m_memdel((void **)alst, sizeof(t_list *));
 	}
 }

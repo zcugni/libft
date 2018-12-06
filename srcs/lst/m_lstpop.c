@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstappend.c                                     :+:      :+:    :+:   */
+/*   m_lstpop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:14:21 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/14 14:14:22 by zcugni           ###   ########.fr       */
+/*   Created: 2018/05/06 12:07:02 by zcugni            #+#    #+#             */
+/*   Updated: 2018/05/06 12:07:03 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstappend(t_list **alst, t_list *new)
-{
-	t_list *tmp;
+/*
+** Remove the first element of a list and return it
+*/
 
-	if (new)
-	{
-		if (*alst)
-		{
-			tmp = *alst;
-			while (tmp->next)
-				tmp = tmp->next;
-			tmp->next = new;
-		}
-		else
-			*alst = new;
-	}
+t_list	*m_lstpop(t_list **lst)
+{
+	t_list	*new;
+	t_list	*tmp;
+
+	new = m_lstnew((*lst)->content, (*lst)->content_size, 0);
+	if (!new)
+		m_exit_error(NULL, errno);
+	tmp = *lst;
+	*lst = (*lst)->next;
+	m_memdel((void **)&tmp, sizeof(t_list *));
+	return (new);
 }

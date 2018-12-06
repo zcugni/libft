@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Clear a string (by putting all it's char to \0)
+*/
+
 void	ft_strclr(char *s)
 {
 	int i;

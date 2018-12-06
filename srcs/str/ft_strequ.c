@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Check if two string are equal
+*/
+
 int		ft_strequ(const char *s1, const char *s2)
 {
 	int i;

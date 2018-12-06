@@ -12,13 +12,17 @@
 
 #include "libft.h"
 
+/*
+** Malloc and return an empty (filled with \0) memory area
+*/
+
 void	*ft_memalloc(size_t size)
 {
 	char	*new;
 
 	new = (char *)malloc(size);
 	if (!new)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	ft_bzero(new, size);
 	return ((void *)new);
 }

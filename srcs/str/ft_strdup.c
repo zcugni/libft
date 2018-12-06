@@ -22,7 +22,7 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	str = (char *)malloc((length + 1) * sizeof(char));
 	if (!str)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	while (i < length)
 	{
 		str[i] = s1[i];

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   m_itoa_base.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,17 @@
 
 #include "libft.h"
 
+/*
+** Convert a number of a given base to a string representing it
+*/
+
 static char	*set_value(int upper, int rest)
 {
 	char	*letter;
 
 	letter = malloc(2);
 	if (!letter)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	letter[0] = rest + 48;
 	letter[0] = (rest == 10 ? 'a' : letter[0]);
 	letter[0] = (rest == 11 ? 'b' : letter[0]);
@@ -32,7 +36,7 @@ static char	*set_value(int upper, int rest)
 	return (letter);
 }
 
-char		*ft_itoa_base(unsigned int nb, int base, int upper)
+char		*m_itoa_base(unsigned int nb, int base, int upper)
 {
 	char	*res;
 	int		rest;
@@ -47,10 +51,10 @@ char		*ft_itoa_base(unsigned int nb, int base, int upper)
 		rest = nb % base;
 		nb /= base;
 		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 1, 1));
-		free(tmp_str);
+		ft_lstadd(&tmp_result, m_lstnew(tmp_str, 1, 1));
+		ft_strdel(&tmp_str);
 	}
-	res = lst_to_str(tmp_result);
-	ft_lstdel(&tmp_result, free);
+	res = m_lst_to_str(tmp_result);
+	m_lstdel(&tmp_result, free);
 	return (res);
 }

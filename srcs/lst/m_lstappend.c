@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_findi.c                                        :+:      :+:    :+:   */
+/*   m_lstappend.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/02 14:34:26 by zcugni            #+#    #+#             */
-/*   Updated: 2018/05/02 14:34:28 by zcugni           ###   ########.fr       */
+/*   Created: 2017/11/14 14:14:21 by zcugni            #+#    #+#             */
+/*   Updated: 2017/11/14 14:14:22 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	lst_findi(t_list *list, void *content, size_t size)
-{
-	t_list	*tmp;
-	int		i;
+/*
+** Add a new node at the end of a list
+*/
 
-	tmp = list;
-	i = 0;
-	while (tmp)
+void	m_lstappend(t_list **alst, t_list *new)
+{
+	t_list *tmp;
+
+	if (new)
 	{
-		if (tmp->content)
-			if (ft_memcmp((const void *)tmp->content,
-			(const void *)content, size) == 0)
-				return (i);
-		tmp = tmp->next;
-		i++;
+		if (*alst)
+		{
+			tmp = *alst;
+			while (tmp->next)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
+		else
+			*alst = new;
 	}
-	return (-1);
 }

@@ -13,18 +13,16 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # define BUFF_SIZE 320
-# define MALLOC_ERR 1
-# define READ_ERR 2
-# define OPEN_ERR 3
-# define MULT_ARGS_ERR 4
-# define MISSING_ARGS_ERR 5
-# define WRONG_FILE_NAME 6
+# define MULT_ARGS_ERR 1
+# define MISSING_ARGS_ERR 2
+# define WRONG_FILE_NAME 3
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
 # include <inttypes.h>
+# include <errno.h>  
 
 /*
 **struct for libft
@@ -119,16 +117,13 @@ char						*ft_strcat(char *s1, const char *s2);
 char						*ft_strchr(const char *s, int c);
 int							ft_strchri(const char *s, int c);
 void						ft_strclr(char *s);
-char						*ft_strcpy(char *dst, const char *src);
 int							ft_strcmp(const char *s1, const char *s2);
+char						*ft_strcpy(char *dst, const char *src);
 void						ft_strdel(char **as);
 char						*ft_strdup(const char *s1);
 int							ft_strequ(char const *s1, char const *s2);
 void						ft_striter(char *s, void (*f)(char *));
 void						ft_striteri(char *s, void (*f)(t_u_int, char *));
-char						*ft_strjoin(char const *s1, char const *s2);
-char						*ft_strjoin_free(char *s1, char *s2,
-	int side_to_free);
 size_t						ft_strlcat(char *dst, const char *src, size_t size);
 size_t						ft_strlen(const char *s);
 char						*ft_strmap(char const *s, char (*f)(char));
@@ -138,7 +133,6 @@ char						*ft_strncat(char *s1, const char *s2, size_t n);
 int							ft_strncmp(const char *s1, const char *s2,
 	size_t n);
 char						*ft_strncpy(char *dst, const char *src, size_t len);
-char						*ft_strndup(const char *s1, size_t n);
 int							ft_strnequ(char const *s1, char const *s2,
 	size_t n);
 char						*ft_strnew(size_t size);
@@ -148,44 +142,44 @@ char						*ft_strrchr(const char *s, int c);
 char						**ft_strsplit(char const *s, char c);
 char						*ft_strstr(const char *haystack,
 	const char *needle);
-char						*ft_strsub(const char *s, t_u_int start,
-	size_t len);
-char						*ft_strsub_free(char *s, t_u_int start, size_t len);
 char						*ft_strtrim(char const *s);
-int							ft_toupper(int c);
 int							ft_tolower(int c);
-char						**ft_strsplit_white(char const *s);
+int							ft_toupper(int c);
+char						*m_strjoin(char *s1, char *s2, int side_to_free);
+char						*m_strndup(const char *s1, size_t n);
+char						**m_strsplit_white(char const *s);
+char						*m_strsub(char *s, t_u_int start, size_t len, int need_free);
 /*
 **Lst
 */
 void						ft_lstadd(t_list **alst, t_list *new);
-void						ft_lstappend(t_list **alst, t_list *new);
-t_list						*ft_lstcpy(t_list *ori, int need_malloc);
-void						ft_lstdel(t_list **alst, void (*del)(void *));
 void						ft_lstdelone(t_list **alst, void (*del)(void *));
-int							lst_findi(t_list *list, void *content, size_t size);
 void						ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-int							ft_lstlen(t_list *lst);
 t_list						*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-t_list						*ft_lstnew(void const *content,
-														size_t content_size, int need_malloc);
-char						*lst_to_str(t_list *lst);
-t_list						*ft_pop(t_list **lst);
-void						bubble_sort_lst(t_list **lst,
+void						m_bubble_sort_lst(t_list **lst,
 												int (*get_nb)(t_list *lst));
+char						*m_lst_to_str(t_list *lst);
+void						m_lstappend(t_list **alst, t_list *new);
+t_list						*m_lstcpy(t_list *ori, int need_malloc);
+void						m_lstdel(t_list **alst, void (*del)(void *));
+int							m_lstfindi(t_list *list, void *content, size_t size);
+size_t						m_lstlen(t_list *lst);
+t_list						*m_lstnew(void const *content,
+														size_t content_size, int need_malloc);
+t_list						*m_lstpop(t_list **lst);
 /*
 **Tree
 */
+void						display_tree_id(t_rbt_node *rbt);
 t_rbt_node					*find_in_tree(t_rbt_node *rbt, t_tree_index *searched_index);
-void						rotate(t_rbt_node *node, int rotate_right);
-t_rbt_node					*new_rbt_node(void *content, t_tree_index *index);
 void						insert_rbt(t_rbt_node **rbt, t_rbt_node *current,
 															t_rbt_node *new);
 int							is_inf(t_tree_index *rbt_index_1, t_tree_index *rbt_index_2);
-t_rbt_node					*rearrange(t_rbt_node *node);
-void						display_tree_id(t_rbt_node *rbt);
+t_rbt_node					*new_rbt_node(void *content, t_tree_index *index);
 void						rbt_clear(t_rbt_node **rbt, void (*free_content)(void *content),
 														int free_str);
+t_rbt_node					*rearrange(t_rbt_node *node);
+void						rotate(t_rbt_node *node, int rotate_right);
 /*
 **IO
 */
@@ -199,7 +193,7 @@ void						ft_putstr(const char *str);
 void						ft_putstr_fd(char const *s, int fd);
 int							get_next_line(const int fd, char **line,
 	char separator);
-void						exit_error(char *msg, int code);
+void						m_exit_error(char *msg, int code);
 /*
 **Mem
 */
@@ -210,10 +204,10 @@ void						*ft_memccpy(void *dst, const void *src, int c,
 	size_t n);
 void						*ft_memchr(const void *s, int c, size_t n);
 void						*ft_memcpy(void *dst, const void *src, size_t n);
-void						ft_memdel(void **ap);
 void						*ft_memmove(void *dst, const void *src, size_t len);
 void						*ft_memset(void *b, int c, size_t len);
-void						get_leaks(char *msg);
+void						m_memdel(void **ap, size_t len);
+void						m_get_leaks(char *msg);
 /*
 **Ft_printf
 */
@@ -244,12 +238,11 @@ char						*ft_itoa_base_uintmax(uintmax_t nb, int base,
 long						ft_atoi_long(char *str);
 long long					ft_atoi_2_long(char *str);
 int							display(t_list *final_lst, int error);
+int							is_neg(char *str);
 /*
 **Misc
 */
 long long					ft_atoi(char *str);
-long long					ft_atoi_harsh(char *str, int accept_neg,
-												int return_value, int is_int);
 int							ft_isascii(int c);
 int							ft_isalnum(int c);
 int							ft_isalpha(int c);
@@ -257,9 +250,9 @@ int							ft_isdigit(int c);
 int							ft_isprint(int c);
 int							ft_iswhitespace(int c);
 char						*ft_itoa(long long nb);
-char						*ft_itoa_base(unsigned int nb, int base, int upper);
-long long					ft_pow(int nb, int power);
-int							is_neg(char *str);
-int							ft_is_neg_digit(char *str);
+char						*m_itoa_base(unsigned int nb, int base, int upper);
+long long					m_pow(int nb, int power);
+long long					m_atoi_harsh(char *str, int accept_neg,
+												int return_value, int is_int);
 
 #endif

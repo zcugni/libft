@@ -12,18 +12,12 @@
 
 #include "libft.h"
 
+/*
+** Print a string on the standart output, followd by a newline
+*/
+
 void	ft_putendl(char const *str)
 {
-	int i;
-
-	i = 0;
-	if (str[i])
-	{
-		while (str[i])
-		{
-			ft_putchar(str[i]);
-			i++;
-		}
-		ft_putchar('\n');
-	}
+	ft_putstr(str);
+	ft_putchar('\n');
 }

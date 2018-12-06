@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_leaks.c                                        :+:      :+:    :+:   */
+/*   m_lstdel.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/06 12:07:54 by zcugni            #+#    #+#             */
-/*   Updated: 2018/05/06 12:07:55 by zcugni           ###   ########.fr       */
+/*   Created: 2017/11/12 17:18:17 by zcugni            #+#    #+#             */
+/*   Updated: 2017/11/12 17:18:19 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <stdio.h>
+/*
+** Free every node of a list. Free it's content only if necessary
+*/
 
-void	get_leaks(char *msg)
+void	m_lstdel(t_list **alst, void (*del)(void *))
 {
-	system("leaks asm");
-	ft_printf("\033[31m%s\033[0m", msg);
-	getchar();
+	if (alst && *alst && del)
+	{
+		if ((*alst)->next)
+			m_lstdel(&((*alst)->next), del);
+		if (del)
+			del((*alst)->content);
+		m_memdel((void **)alst, sizeof(t_list *));
+	}
 }

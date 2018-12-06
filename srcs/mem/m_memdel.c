@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   m_memdel.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 14:33:02 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/10 14:33:07 by zcugni           ###   ########.fr       */
+/*   Created: 2017/11/09 14:26:18 by zcugni            #+#    #+#             */
+/*   Updated: 2017/11/09 14:26:22 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
-{
-	char	*str;
-	size_t	i;
+/*
+** Free and set to null a memory area
+*/
 
-	i = 0;
-	if (n != 0)
+void	m_memdel(void **ap, size_t len)
+{
+	if (ap)
 	{
-		str = malloc((n + 1) * sizeof(char));
-		if (!str)
-			exit_error("malloc error\n", MALLOC_ERR);
-		while (i < n)
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		str[i] = '\0';
+		ft_bzero(*ap, len);
+		free(*ap);
+		*ap = NULL;
 	}
-	else
-		str = NULL;
-	return (str);
 }

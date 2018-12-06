@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_to_str.c                                       :+:      :+:    :+:   */
+/*   m_strsub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/04 15:41:01 by zcugni            #+#    #+#             */
-/*   Updated: 2018/01/04 15:41:03 by zcugni           ###   ########.fr       */
+/*   Created: 2018/01/17 11:12:01 by zcugni            #+#    #+#             */
+/*   Updated: 2018/01/17 11:12:02 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*lst_to_str(t_list *lst)
-{
-	int		i;
-	char	*str;
-	t_list	*tmp_lst;
+/*
+** Return a part of string as a new string
+** (If the asked part doesn't exist, the behavior is not determined)
+** Free the original string if needed
+*/
 
-	tmp_lst = lst;
-	str = malloc(ft_lstlen(lst) + 1);
+char	*m_strsub(char *s, t_u_int start, size_t len, int need_free)
+{
+	char	*str;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
-		exit_error("malloc error", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	i = 0;
-	while (tmp_lst)
+	while (i < len)
 	{
-		str[i] = ((char *)(tmp_lst)->content)[0];
+		str[i] = s[start + i];
 		i++;
-		tmp_lst = (tmp_lst)->next;
 	}
 	str[i] = '\0';
+	if (need_free)
+		ft_strdel(&s);
 	return (str);
 }

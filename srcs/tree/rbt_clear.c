@@ -23,8 +23,8 @@ void	rbt_clear(t_rbt_node **rbt, void (*free_content)(void *content),
 			rbt_clear(&(*rbt)->right_child, free_content, free_str);
 		if (free_str)
 			ft_strdel(&(*rbt)->index->str);
-		ft_memdel((void **)&(*rbt)->index);
+		m_memdel((void **)&(*rbt)->index, sizeof(t_tree_index));
 		free_content((*rbt)->content);
-		ft_memdel((void **)rbt);
+		m_memdel((void **)rbt, sizeof(t_rbt_node *));
 	}
 }

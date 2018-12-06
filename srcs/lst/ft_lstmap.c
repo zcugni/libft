@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Apply f function to each element of the list
+** and create a new list with the result
+*/
+
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list *new;

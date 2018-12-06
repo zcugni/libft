@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Add a new node at the start of a list
+*/
+
 void	ft_lstadd(t_list **alst, t_list *new)
 {
 	if (new)

@@ -12,21 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Print a number on the standart output
+*/
+
 void	ft_putnbr(int nb)
 {
-	if (nb >= 0 && nb < 10)
-		ft_putchar(nb + 48);
-	else if (nb > -10 && nb < 0)
-	{
-		ft_putchar('-');
-		ft_putchar(-nb + 48);
-	}
-	else
-	{
-		ft_putnbr(nb / 10);
-		if (nb < 0)
-			ft_putchar(-(nb % 10) + 48);
-		else
-			ft_putchar((nb % 10) + 48);
-	}
+	ft_putnbr_fd(nb, 1);
 }

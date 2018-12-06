@@ -12,34 +12,25 @@
 
 #include "libft.h"
 
+/*
+** Read the next "line" on the given file descriptor. 
+** A line is defined by the separator char
+*/
+
 static int	if_return(char **rest, char **line, int index)
 {
-	*line = ft_strndup(*rest, index);
+	*line = m_strndup(*rest, index);
 	if (!*line && index != 0)
 	{
 		ft_strdel(rest);
 		return (-1);
 	}
 	if (index == (int)ft_strlen(*rest) - 1)
-		ft_memdel((void **)rest);
+		ft_strdel(rest);
 	else
 		ft_memmove(*rest, &((*rest)[index + 1]),
 				ft_strlen(&((*rest)[index + 1])) + 1);
 	return (1);
-}
-
-char		*ft_strncpyat(char *dst, const char *src, int shift)
-{
-	int i;
-
-	i = 0;
-	while (src[i])
-	{
-		dst[i + shift] = src[i];
-		i++;
-	}
-	dst[i + shift] = 'a';
-	return (dst);
 }
 
 static char	*ft_strjoin_overlap(char **s1, char *s2)
@@ -57,15 +48,15 @@ static char	*ft_strjoin_overlap(char **s1, char *s2)
 		len_1 = ft_strlen(*s1);
 		len_2 = ft_strlen(s2);
 		str = malloc(len_1 + len_2 + 1);
+		ft_bzero(str, len_1 + len_2 + 1);
 		if (!str)
 		{
 			ft_strdel(s1);
-			return (NULL);
+			m_exit_error(NULL, errno);
 		}
-		ft_strncpyat(str, *s1, 0); ///// c'est pas juste cat ca o_o
-		ft_strncpyat(str, s2, len_1);
+		ft_strcat(str, *s1);
+		ft_strcat(str, s2);
 		ft_strdel(s1);
-		str[len_1 + len_2] = '\0';
 	}
 	return (str);
 }

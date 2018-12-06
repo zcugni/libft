@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlen.c                                        :+:      :+:    :+:   */
+/*   m_lstlen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,14 @@
 
 #include "libft.h"
 
-int	ft_lstlen(t_list *lst)
+/*
+** Return the length of a string
+*/
+
+size_t	m_lstlen(t_list *lst)
 {
 	t_list	*tmp;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	tmp = lst;

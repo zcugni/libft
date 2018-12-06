@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Check if two string are equal until a given index
+*/
+
 int		ft_strnequ(const char *s1, const char *s2, size_t n)
 {
 	size_t i;

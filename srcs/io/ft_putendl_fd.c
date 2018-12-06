@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Print a string on the given file descriptor, followd by a newline
+*/
+
 void	ft_putendl_fd(char const *str, int fd)
 {
 	if (str)

@@ -12,17 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Print a string on the standart output
+*/
+
 void	ft_putstr(char const *str)
 {
-	int i;
-
-	i = 0;
-	if (str[i])
-	{
-		while (str[i])
-		{
-			ft_putchar(str[i]);
-			i++;
-		}
-	}	
+	ft_putstr_fd(str, 1);
 }

@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Set to Null and free a string. (Also set to null each of it's char)
+*/
+
 void	ft_strdel(char **str)
 {
 	if (str && *str)

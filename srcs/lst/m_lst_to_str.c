@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   m_lst_to_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 15:08:32 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/09 15:08:37 by zcugni           ###   ########.fr       */
+/*   Created: 2018/01/04 15:41:01 by zcugni            #+#    #+#             */
+/*   Updated: 2018/01/04 15:41:03 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, t_u_int start, size_t len)
-{
-	char	*str;
-	size_t	i;
+/*
+** Create a string from a list
+*/
 
-	if (!s)
-		return (NULL);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		exit_error("malloc error\n", MALLOC_ERR);
+char	*m_lst_to_str(t_list *lst)
+{
+	int		i;
+	char	*str;
+	t_list	*tmp_lst;
+
+	tmp_lst = lst;
+	str = malloc(m_lstlen(lst) + 1);
+	if (!str)
+		m_exit_error(NULL, errno);
 	i = 0;
-	while (i < len)
+	while (tmp_lst)
 	{
-		str[i] = s[start + i];
+		str[i] = ((char *)(tmp_lst)->content)[0];
 		i++;
+		tmp_lst = (tmp_lst)->next;
 	}
 	str[i] = '\0';
 	return (str);

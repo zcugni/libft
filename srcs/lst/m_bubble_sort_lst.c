@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bubble_sort_lst.c                                  :+:      :+:    :+:   */
+/*   m_bubble_sort_lst.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+** Sort a list using the bubble sort algorithm
+*/
 
 static void	swap_elem(t_bubble_sort *sort_inf, t_list **lst)
 {
@@ -31,7 +35,7 @@ static void	init_inf(t_bubble_sort *sort_inf, t_list **lst)
 	sort_inf->second_el = sort_inf->first_el->next;
 }
 
-void		bubble_sort_lst(t_list **lst, int (*get_nb)(t_list *lst))
+void		m_bubble_sort_lst(t_list **lst, int (*get_nb)(t_list *lst))
 {
 	t_bubble_sort	sort_inf;
 	int				dist;

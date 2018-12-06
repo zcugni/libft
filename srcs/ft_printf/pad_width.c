@@ -20,7 +20,7 @@ char		*fill_new_str(char chara, int len)
 	i = 0;
 	str = malloc(len);
 	if (!str)
-		exit_error("malloc error\n", 1);
+		m_exit_error(NULL, errno);
 	while (i < len)
 	{
 		str[i] = chara;
@@ -45,16 +45,16 @@ static void	join_filler(t_detail *conv_det, char chara, int right, size_t len)
 	{
 		filler[i++] = '-';
 		diff++;
-		result->str[0] = ft_strsub_free(result->str[0], 1,
-						ft_strlen(result->str[0]) - 1);
+		result->str[0] = m_strsub(result->str[0], 1,
+						ft_strlen(result->str[0]) - 1, 0);
 	}
 	while (i < diff)
 		filler[i++] = chara;
 	if (right)
-		result->str[result->size - 1] = ft_strjoin_free(
+		result->str[result->size - 1] = m_strjoin(
 								result->str[result->size - 1], filler, 2);
 	else
-		result->str[0] = ft_strjoin_free(filler, result->str[0], 2);
+		result->str[0] = m_strjoin(filler, result->str[0], 2);
 }
 
 void		pad_width(t_detail *conv_detail, char chara, int right)

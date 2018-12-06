@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_harsh.c                                    :+:      :+:    :+:   */
+/*   m_atoi_harsh.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,15 @@
 
 #include "libft.h"
 
-long long	ft_atoi_harsh(char *str, int accept_neg, int return_value,
+/*
+** Harsher atoi than the original, with more option.
+** Can accept or refuse negative number.
+** Accept number up to long long size,
+** 		but can force a number to be inferior to an int.
+** The error return value is defined by a parameter.
+*/
+
+long long	m_atoi_harsh(char *str, int accept_neg, int return_value,
 																	int is_int)
 {
 	long long	fin_nb;

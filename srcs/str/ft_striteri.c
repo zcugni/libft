@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Like ft_striter, apply f function to each char of a string.
+** But this time, give the index of the char as a parameter.
+*/
+
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	t_u_int i;

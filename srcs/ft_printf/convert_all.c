@@ -43,13 +43,13 @@ static char	*handle_based(char *width_mod, char *type, va_list ap)
 		base = 16;
 	upper = (*type == 'X' ? 1 : 0);
 	if (width_mod == NULL && *type != 'U' && *type != 'O')
-		return (ft_itoa_base(va_arg(ap, unsigned int), base, upper));
+		return (m_itoa_base(va_arg(ap, unsigned int), base, upper));
 	else if (*type == 'U' || *type == 'O' || ft_strcmp(width_mod, "l") == 0)
 		return (ft_itoa_base_long(va_arg(ap, unsigned long), base, upper));
 	if (ft_strcmp(width_mod, "hh") == 0)
-		return (ft_itoa_base((unsigned char)va_arg(ap, int), base, upper));
+		return (m_itoa_base((unsigned char)va_arg(ap, int), base, upper));
 	else if (ft_strcmp(width_mod, "h") == 0)
-		return (ft_itoa_base((unsigned short)va_arg(ap, int), base, upper));
+		return (m_itoa_base((unsigned short)va_arg(ap, int), base, upper));
 	else if (ft_strcmp(width_mod, "ll") == 0)
 		return (ft_itoa_base_2_long(
 				va_arg(ap, unsigned long long), base, upper));
@@ -74,7 +74,7 @@ static void	handle_sc(char *t, char *width_mod, t_detail *conv_det, va_list ap)
 	{
 		conv_det->conv->str[0] = malloc(2);
 		if (conv_det->conv->str[0])
-			exit_error("malloc error\n", MALLOC_ERR);
+			m_exit_error(NULL, errno);
 		conv_det->conv->str[0][0] = (char)va_arg(ap, int);
 		conv_det->conv->str[0][1] = '\0';
 	}
@@ -86,11 +86,11 @@ static void	init(char **width_mod, char **type, t_detail *conv_detail)
 {
 	conv_detail->conv = malloc(sizeof(t_result));
 	if (!conv_detail->conv)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	conv_detail->conv->size = 1;
 	conv_detail->conv->str = malloc(sizeof(char *));
 	if (!conv_detail->conv->str)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	*width_mod = conv_detail->info->next->content;
 	*type = &((char *)conv_detail->info->content)[0];
 }
@@ -105,7 +105,7 @@ void		convert(va_list ap, t_detail *conv_detail)
 		handle_sc(type, width_mod, conv_detail, ap);
 	else if (*type == 'p')
 	{
-		ft_lstappend(&(conv_detail->info), ft_lstnew("#", 1, 1));
+		m_lstappend(&(conv_detail->info), m_lstnew("#", 1, 1));
 		conv_detail->conv->str[0] = ft_itoa_base_2_long(
 									(t_ull)va_arg(ap, void *), 16, 0);
 	}
@@ -121,5 +121,5 @@ void		convert(va_list ap, t_detail *conv_detail)
 			*type -= 32;
 	}
 	else
-		conv_detail->conv->str[0] = ft_strndup(type, 1);
+		conv_detail->conv->str[0] = m_strndup(type, 1);
 }

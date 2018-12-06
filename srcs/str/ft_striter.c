@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Apply f function to each char of a string
+*/
+
 void	ft_striter(char *s, void (*f)(char *))
 {
 	int i;

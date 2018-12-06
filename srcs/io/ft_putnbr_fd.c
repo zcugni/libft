@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Print a number on the given file descriptor
+*/
+
 void	ft_putnbr_fd(int nb, int fd)
 {
 	if (nb >= 0 && nb < 10)

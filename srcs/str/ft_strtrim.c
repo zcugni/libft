@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Return a copy of the given string
+** without it's whitespace at the start and the beginning
+*/
+
 static	t_trim	find_nb_to_trim(char const *s)
 {
 	size_t	i;
@@ -55,7 +60,7 @@ char			*ft_strtrim(char const *s)
 	new_len = ft_strlen(s) - (to_trim.start + to_trim.end);
 	str = malloc(new_len + 1);
 	if (!str)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	j = 0;
 	i = to_trim.start;
 	while (i < ft_strlen(s) - to_trim.end)

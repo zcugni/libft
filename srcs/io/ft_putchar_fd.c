@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
+/*
+** Print a char on the given file descriptor
+*/
+
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, (const void*)&c, 1);
+	write(fd, &c, 1);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstcpy.c                                        :+:      :+:    :+:   */
+/*   m_lstcpy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
-t_list	*ft_lstcpy(t_list *ori, int need_malloc)
+/*
+** Copy a list into a new malloc'ed one
+*/
+
+t_list	*m_lstcpy(t_list *ori, int need_malloc)
 {
 	t_list *new;
 	t_list *first_elem;
@@ -20,17 +24,17 @@ t_list	*ft_lstcpy(t_list *ori, int need_malloc)
 
 	if (!ori)
 		return (NULL);
-	new = ft_lstnew(ori->content, ori->content_size, need_malloc);
+	new = m_lstnew(ori->content, ori->content_size, need_malloc);
 	if (!new)
-		exit_error("malloc error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	first_elem = new;
 	current = ori->next;
 	while (current)
 	{
-		new->next = ft_lstnew(current->content, current->content_size,
+		new->next = m_lstnew(current->content, current->content_size,
 															need_malloc);
 		if (!new->next)
-			exit_error("malloc error\n", MALLOC_ERR);
+			m_exit_error(NULL, errno);
 		new = new->next;
 		current = current->next;
 	}

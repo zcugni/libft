@@ -18,7 +18,7 @@ static char	*set_value(int upper, int rest)
 
 	letter = malloc(2);
 	if (!letter)
-		exit_error("malloc_error\n", MALLOC_ERR);
+		m_exit_error(NULL, errno);
 	letter[0] = rest + 48;
 	letter[0] = (rest == 10 ? 'a' : letter[0]);
 	letter[0] = (rest == 11 ? 'b' : letter[0]);
@@ -47,11 +47,11 @@ char		*ft_itoa_base_long(unsigned long nb, int base, int upper)
 		rest = nb % base;
 		nb /= base;
 		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 2, 1));
+		ft_lstadd(&tmp_result, m_lstnew(tmp_str, 2, 1));
 		free(tmp_str);
 	}
-	res = lst_to_str(tmp_result);
-	ft_lstdel(&tmp_result, free);
+	res = m_lst_to_str(tmp_result);
+	m_lstdel(&tmp_result, free);
 	return (res);
 }
 
@@ -70,11 +70,11 @@ char		*ft_itoa_base_2_long(unsigned long long nb, int base, int upper)
 		rest = nb % base;
 		nb /= base;
 		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 2, 1));
+		ft_lstadd(&tmp_result, m_lstnew(tmp_str, 2, 1));
 		free(tmp_str);
 	}
-	res = lst_to_str(tmp_result);
-	ft_lstdel(&tmp_result, free);
+	res = m_lst_to_str(tmp_result);
+	m_lstdel(&tmp_result, free);
 	return (res);
 }
 
@@ -93,10 +93,10 @@ char		*ft_itoa_base_uintmax(uintmax_t nb, int base, int upper)
 		rest = nb % base;
 		nb /= base;
 		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, ft_lstnew(tmp_str, 2, 1));
+		ft_lstadd(&tmp_result, m_lstnew(tmp_str, 2, 1));
 		free(tmp_str);
 	}
-	res = lst_to_str(tmp_result);
-	ft_lstdel(&tmp_result, free);
+	res = m_lst_to_str(tmp_result);
+	m_lstdel(&tmp_result, free);
 	return (res);
 }
