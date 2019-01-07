@@ -6,7 +6,7 @@
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 09:52:18 by zcugni            #+#    #+#             */
-/*   Updated: 2017/11/20 09:42:28 by zcugni           ###   ########.fr       */
+/*   Updated: 2019/01/07 13:41:34 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ int							is_neg(char *str);
 /*
 **Misc
 */
-long long					ft_atoi(char *str);
+int							ft_atoi(char *str);
 int							ft_isascii(int c);
 int							ft_isalnum(int c);
 int							ft_isalpha(int c);

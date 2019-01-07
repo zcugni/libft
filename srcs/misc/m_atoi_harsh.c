@@ -6,7 +6,7 @@
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 15:20:12 by zcugni            #+#    #+#             */
-/*   Updated: 2018/05/24 15:20:13 by zcugni           ###   ########.fr       */
+/*   Updated: 2019/01/07 13:43:11 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,35 @@
 ** The error return value is defined by a parameter.
 */
 
-long long	m_atoi_harsh(char *str, int accept_neg, int return_value,
+static int		free_ret(char **trimmed, int return_val)
+{
+	ft_strdel(trimmed);
+	return (return_val);
+}
+
+long long		m_atoi_harsh(char *str, int accept_neg, int return_val,
 																	int is_int)
 {
-	long long	fin_nb;
-	int			is_neg;
+	long long	nb;
 	int			i;
+	char		*trimmed;
 
-	is_neg = 0;
-	fin_nb = 0;
+	nb = 0;
 	i = 0;
-	while (ft_iswhitespace(str[i]))
+	trimmed = ft_strtrim(str);
+	if (trimmed[i] == '-' && accept_neg)
 		i++;
-	if (str[i] == '-' && accept_neg)
+	else if (trimmed[i] == '-' && !accept_neg)
+		return (free_ret(&trimmed, return_val));
+	while (trimmed[i] && ft_isdigit(trimmed[i]))
 	{
-		is_neg = 1;
+		nb *= 10;
+		nb += (trimmed[i] - 48);
 		i++;
 	}
-	else if (str[i] == '-' && !accept_neg)
-		return (return_value);
-	while (ft_isdigit(str[i]))
-		fin_nb = fin_nb * 10 + (str[i++] - '0');
-	while (ft_iswhitespace(str[i]))
-		i++;
-	if ((str[i] && !ft_isdigit(str[i])) || (fin_nb > 2147483647 && is_int))
-		return (return_value);
-	if (is_neg == 0)
-		return (fin_nb);
-	return (-fin_nb);
+	if (trimmed[i] || (nb > 2147483647 && is_int))
+		return (free_ret(&trimmed, return_val));
+	if (trimmed[0] == '-')
+		return (free_ret(&trimmed, -nb));
+	return (free_ret(&trimmed, nb));
 }

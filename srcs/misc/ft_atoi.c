@@ -6,35 +6,38 @@
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 10:58:34 by zcugni            #+#    #+#             */
-/*   Updated: 2017/07/10 10:58:39 by zcugni           ###   ########.fr       */
+/*   Updated: 2019/01/07 13:43:41 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long long	ft_atoi(char *str)
+static int	free_ret(char **trimmed, int return_val)
 {
-	long long	final_nb;
-	int			is_neg;
+	ft_strdel(trimmed);
+	return (return_val);
+}
 
-	final_nb = 0;
-	is_neg = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '-')
+int			ft_atoi(char *str)
+{
+	int		nb;
+	int		i;
+	char	*trimmed;
+
+	nb = 0;
+	i = 0;
+	trimmed = ft_strtrim(str);
+	if (trimmed[0] == '-' || trimmed[0] == '+')
+		i++;
+	while (trimmed[i] && ft_isdigit(trimmed[i]))
 	{
-		is_neg = 1;
-		str++;
+		nb *= 10;
+		nb += (trimmed[i] - 48);
+		i++;
 	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		final_nb = final_nb * 10 + (*str - '0');
-		str++;
-	}
-	if (is_neg == 0)
-		return (final_nb);
-	else
-		return (-final_nb);
+	if (trimmed[i])
+		return (free_ret(&trimmed, 0));
+	if (trimmed[0] == '-')
+		return (free_ret(&trimmed, -nb));
+	return (free_ret(&trimmed, nb));
 }
