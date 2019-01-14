@@ -60,6 +60,6 @@ char		**m_strsplit_white(char const *s)
 	arr = malloc(sizeof(char *) * (nb_words + 1));
 	if (!arr)
 		m_exit_error(NULL, errno);
-	fil_arr(s, arr);
+	fill_arr(s, &(arr[i]));
 	return (arr);
 }
