@@ -57,9 +57,12 @@ char		**m_strsplit_white(char const *s)
 	while (ft_ishitespace(s[i]))
 		i++;
 	nb_words = count_words(&(s[i]));
-	arr = malloc(sizeof(char *) * (nb_words + 1));
-	if (!arr)
-		m_exit_error(NULL, errno);
-	fill_arr(s, &(arr[i]));
+	if (nb_words > 0)
+	{
+		arr = malloc(sizeof(char *) * (nb_words + 1));
+		if (!arr)
+			m_exit_error(NULL, errno);
+		fill_arr(s, &(arr[i]));
+	}
 	return (arr);
 }
