@@ -69,9 +69,14 @@ char		**ft_strsplit(char const *s, char c)
 	while (s[i] == c)
 		i++;
 	nb_words = count_words(&(s[i]), c);
-	arr = malloc(sizeof(char *) * (nb_words + 1));
-	if (!arr)
-		m_exit_error(NULL, errno);
-	fill_arr(s, c, &(arr[i]));
+	if (nb_words > 0)
+	{
+		arr = malloc(sizeof(char *) * (nb_words + 1));
+		if (!arr)
+			m_exit_error(NULL, errno);
+		fill_arr(s, c, &(arr[i]));
+	}
+	else
+		arr = NULL;	
 	return (arr);
 }
