@@ -5,56 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/04 15:40:53 by zcugni            #+#    #+#             */
-/*   Updated: 2018/01/04 15:40:55 by zcugni           ###   ########.fr       */
+/*   Created: 2019/01/21 16:07:07 by zcugni            #+#    #+#             */
+/*   Updated: 2019/01/21 16:07:08 by zcugni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Convert a number of a given base to a string representing it
-*/
-
-static char	*set_value(int upper, int rest)
+static int	len_nb(int nb, int base)
 {
-	char	*letter;
+	int len;
 
-	letter = malloc(2);
-	if (!letter)
-		m_exit_error(NULL, errno);
-	letter[0] = rest + 48;
-	letter[0] = (rest == 10 ? 'a' : letter[0]);
-	letter[0] = (rest == 11 ? 'b' : letter[0]);
-	letter[0] = (rest == 12 ? 'c' : letter[0]);
-	letter[0] = (rest == 13 ? 'd' : letter[0]);
-	letter[0] = (rest == 14 ? 'e' : letter[0]);
-	letter[0] = (rest == 15 ? 'f' : letter[0]);
-	if (upper)
-		letter[0] -= 32;
-	letter[1] = '\0';
-	return (letter);
+	len = 1;
+	while (nb <= -base || nb >= base)
+	{
+		nb /= base;
+		len++;
+	}
+	return (len);
 }
 
-char		*m_itoa_base(unsigned int nb, int base, int upper)
+static char	convert_val(int nb)
 {
-	char	*res;
-	int		rest;
-	t_list	*tmp_result;
-	char	*tmp_str;
+	if (nb >= 1 && nb <= 9)
+		return (nb + 48);
+	else if (nb == 10)
+		return ('A');
+	else if (nb == 11)
+		return ('B');
+	else if (nb == 12)
+		return ('C');
+	else if (nb == 13)
+		return ('D');
+	else if (nb == 14)
+		return ('E');
+	else if (nb == 15)
+		return ('F');
+	return (48);
+}
 
-	tmp_result = NULL;
-	if (nb == 0)
-		return (ft_strdup("0"));
-	while (nb != 0)
+/*
+**Only goes up to base 16
+**I don't take into consideration the '-'
+**for other base than 10
+*/
+
+char		*m_itoa_base(int nb, int base)
+{
+	char	*str;
+	int		len;
+	int		is_neg;
+	int		mod;
+
+	len = len_nb(nb, base);
+	is_neg = 0;
+	if (nb < 0 && base == 10)
 	{
-		rest = nb % base;
-		nb /= base;
-		tmp_str = set_value(upper, rest);
-		ft_lstadd(&tmp_result, m_lstnew(tmp_str, 1, 1));
-		ft_strdel(&tmp_str);
+		is_neg = 1;
+		len++;
 	}
-	res = m_lst_to_str(tmp_result);
-	m_lstdel(&tmp_result, free);
-	return (res);
+	str = malloc(len + 1);
+	if (!str)
+		m_exit_error(NULL, errno);
+	str[len + 1] = '\0';
+	while (len > is_neg)
+	{
+		mod = (nb > 0) ? nb % base : -nb % base;
+		str[--len] = convert_val(mod);
+		nb = nb / base;
+	}
+	if (is_neg)
+		str[0] = '-';
+	return (str);
 }
