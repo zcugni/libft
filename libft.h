@@ -252,6 +252,7 @@ int							ft_iswhitespace(int c);
 char						*ft_itoa(long long nb);
 char						*m_itoa_base(unsigned int nb, int base, int upper);
 long long					m_pow(int nb, int power);
+int							m_atoi_base(char *str, int nb);
 long long					m_atoi_harsh(char *str, int accept_neg,
 												int return_value, int is_int);
 
