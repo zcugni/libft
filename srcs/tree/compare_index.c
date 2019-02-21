@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Compare indexes depending of if it's a number or a string
+*/
+
 int		is_inf(t_tree_index *rbt_index_1, t_tree_index *rbt_index_2)
 {
 	if (rbt_index_1->is_nb)

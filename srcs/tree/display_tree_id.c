@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Display the tree by printing the path to the node and it's content
+*/
+
 void	display_tree_id(t_rbt_node *rbt)
 {
 	if (rbt)

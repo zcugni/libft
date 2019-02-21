@@ -40,16 +40,16 @@ static void	fill_arr(char const *s, char c, char **arr)
 	size_t	j;
 	size_t	word;
 	size_t	i;
-	
+
 	i = 0;
 	j = 0;
 	word = 0;
-	while (str[j])
+	while (s[j])
 	{
-		while (str[j] && str[j] != c)
-			j++
-		arr[word] = ft_strndup(&(str[i]), j - i);
-		while (str[j] && str[j] == c)
+		while (s[j] && s[j] != c)
+			j++;
+		arr[word] = m_strndup(&(s[i]), j - i);
+		while (s[j] && s[j] == c)
 			j++;
 		i = j;
 		word++;
@@ -60,8 +60,8 @@ static void	fill_arr(char const *s, char c, char **arr)
 char		**ft_strsplit(char const *s, char c)
 {
 	char	**arr;
-	int	nb_words;
-	int	i;
+	int		nb_words;
+	int		i;
 
 	if (!s)
 		return (NULL);
@@ -77,6 +77,6 @@ char		**ft_strsplit(char const *s, char c)
 		fill_arr(s, c, &(arr[i]));
 	}
 	else
-		arr = NULL;	
+		arr = NULL;
 	return (arr);
 }

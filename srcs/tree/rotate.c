@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Rotate the nodes of the tree in the specified direction
+*/
+
 static void	update_node(t_rbt_node *node, t_rbt_node *child, int right_side)
 {
 	if (right_side)

@@ -20,7 +20,8 @@ static void	handle_2_percent(t_pos *pos, t_list **final_lst, t_detail *co_det)
 	{
 		if (pos->start != pos->i)
 			m_lstappend(final_lst, m_lstnew(m_strsub(co_det->ori_str,
-				pos->start, pos->i - pos->start, 0), pos->i - pos->start + 1, 1));
+				pos->start, pos->i - pos->start, 0),
+												pos->i - pos->start + 1, 1));
 		tmp = ft_strdup("%");
 		m_lstappend(final_lst, m_lstnew(tmp, 2, 1));
 		free(tmp);

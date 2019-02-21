@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /*
-** Read the next "line" on the given file descriptor. 
+** Read the next "line" on the given file descriptor.
 ** A line is defined by the separator char
 */
 

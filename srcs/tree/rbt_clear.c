@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Free all the nodes and their content if needed using a given function.
+*/
+
 void	rbt_clear(t_rbt_node **rbt, void (*free_content)(void *content),
 														int free_str)
 {

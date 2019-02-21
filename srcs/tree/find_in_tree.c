@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Return a node of the specified index
+*/
+
 t_rbt_node	*find_in_tree(t_rbt_node *rbt, t_tree_index *searched_index)
 {
 	if (rbt)

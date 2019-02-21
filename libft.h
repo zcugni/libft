@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <inttypes.h>
-# include <errno.h>  
+# include <errno.h>
 
 /*
 **struct for libft
@@ -148,7 +148,8 @@ int							ft_toupper(int c);
 char						*m_strjoin(char *s1, char *s2, int side_to_free);
 char						*m_strndup(const char *s1, size_t n);
 char						**m_strsplit_white(char const *s);
-char						*m_strsub(char *s, t_u_int start, size_t len, int need_free);
+char						*m_strsub(char *s, t_u_int start, size_t len,
+																int need_free);
 /*
 **Lst
 */
@@ -162,22 +163,25 @@ char						*m_lst_to_str(t_list *lst);
 void						m_lstappend(t_list **alst, t_list *new);
 t_list						*m_lstcpy(t_list *ori, int need_malloc);
 void						m_lstdel(t_list **alst, void (*del)(void *));
-int							m_lstfindi(t_list *list, void *content, size_t size);
+int							m_lstfindi(t_list *list, void *content,
+																size_t size);
 size_t						m_lstlen(t_list *lst);
 t_list						*m_lstnew(void const *content,
-														size_t content_size, int need_malloc);
+										size_t content_size, int need_malloc);
 t_list						*m_lstpop(t_list **lst);
 /*
 **Tree
 */
 void						display_tree_id(t_rbt_node *rbt);
-t_rbt_node					*find_in_tree(t_rbt_node *rbt, t_tree_index *searched_index);
+t_rbt_node					*find_in_tree(t_rbt_node *rbt,
+												t_tree_index *searched_index);
 void						insert_rbt(t_rbt_node **rbt, t_rbt_node *current,
 															t_rbt_node *new);
-int							is_inf(t_tree_index *rbt_index_1, t_tree_index *rbt_index_2);
+int							is_inf(t_tree_index *rbt_index_1,
+													t_tree_index *rbt_index_2);
 t_rbt_node					*new_rbt_node(void *content, t_tree_index *index);
-void						rbt_clear(t_rbt_node **rbt, void (*free_content)(void *content),
-														int free_str);
+void						rbt_clear(t_rbt_node **rbt,
+						void (*free_content)(void *content), int free_str);
 t_rbt_node					*rearrange(t_rbt_node *node);
 void						rotate(t_rbt_node *node, int rotate_right);
 /*
@@ -250,8 +254,7 @@ int							ft_isdigit(int c);
 int							ft_isprint(int c);
 int							ft_iswhitespace(int c);
 char						*ft_itoa(int n);
-char						*m_itoa_base(int nb, int base);
-char						*m_itoa_base(unsigned int nb, int base, int upper);
+char						*m_itoa_base(int nb, int base, int upper);
 long long					m_pow(int nb, int power);
 int							m_atoi_base(char *str, int nb);
 long long					m_atoi_harsh(char *str, int accept_neg,

@@ -25,22 +25,14 @@ static int	len_nb(int nb, int base)
 	return (len);
 }
 
-static char	convert_val(int nb)
+static char	convert_val(int nb, int upper)
 {
 	if (nb >= 1 && nb <= 9)
 		return (nb + 48);
-	else if (nb == 10)
-		return ('A');
-	else if (nb == 11)
-		return ('B');
-	else if (nb == 12)
-		return ('C');
-	else if (nb == 13)
-		return ('D');
-	else if (nb == 14)
-		return ('E');
-	else if (nb == 15)
-		return ('F');
+	else if (nb >= 10 && nb <= 15 && upper)
+		return (nb + 31);
+	else if (nb >= 10 && nb <= 15 && !upper)
+		return (nb + 51);
 	return (48);
 }
 
@@ -50,7 +42,7 @@ static char	convert_val(int nb)
 **for other base than 10
 */
 
-char		*m_itoa_base(int nb, int base)
+char		*m_itoa_base(int nb, int base, int upper)
 {
 	char	*str;
 	int		len;
@@ -71,7 +63,7 @@ char		*m_itoa_base(int nb, int base)
 	while (len > is_neg)
 	{
 		mod = (nb > 0) ? nb % base : -nb % base;
-		str[--len] = convert_val(mod);
+		str[--len] = convert_val(mod, upper);
 		nb = nb / base;
 	}
 	if (is_neg)

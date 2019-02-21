@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   m_strsplit_white.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zcugni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/21 14:43:03 by zcugni            #+#    #+#             */
+/*   Updated: 2019/02/21 14:43:05 by zcugni           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 /*
@@ -16,7 +28,7 @@ static int	count_words(char const *s)
 	{
 		while (s[i] && !ft_iswhitespace(s[i]))
 			i++;
-		nb_words ++;
+		nb_words++;
 		while (s[i] && ft_iswhitespace(s[i]))
 			i++;
 	}
@@ -36,8 +48,8 @@ static void	fill_arr(char const *s, char **arr)
 	{
 		while (s[i] && !ft_iswhitespace(s[i]))
 			i++;
-		arr[word] = ft_strndup(&(s[i]), j - i);
-		while (ft_iswhitespace([i]))
+		arr[word] = m_strndup(&(s[i]), j - i);
+		while (ft_iswhitespace(s[i]))
 			i++;
 		i = j;
 		word++;
@@ -48,13 +60,13 @@ static void	fill_arr(char const *s, char **arr)
 char		**m_strsplit_white(char const *s)
 {
 	char	**arr;
-	int	nb_words;
-	int	i;
-	
+	int		nb_words;
+	int		i;
+
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (ft_ishitespace(s[i]))
+	while (ft_iswhitespace(s[i]))
 		i++;
 	nb_words = count_words(&(s[i]));
 	if (nb_words > 0)

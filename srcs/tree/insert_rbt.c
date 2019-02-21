@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Insert a new node into the tree. First arrange it again if needed.
+*/
+
 static int			is_uncle_red(t_rbt_node *node)
 {
 	t_rbt_node	*grand_parent;
